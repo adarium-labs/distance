@@ -1,0 +1,35 @@
+# Alire build artifacts
+/obj/
+/lib/
+/alire/
+/config/
+
+# SPARK/GNAT artifacts
+*.ali
+*.o
+*.lexch
+*.a
+/gnatprove/
+/gnatdoc/
+
+# Test artifacts
+alr_test_*.log
+
+# Windsurf IDE personal settings (NOT project workflows)
+.windsurf/settings.json
+.windsurf/cascade/
+.windsurf/.cascade/
+
+# BMad Method installations (personal - each dev installs their own)
+# If using enterprise git submodules approach, comment these out
+.bmad/bmb/
+.bmad/bmgd/
+.bmad/bmm/
+
+# Keep project-specific BMad config
+!.bmad/_cfg/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+*~

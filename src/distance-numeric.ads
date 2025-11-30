@@ -1,0 +1,94 @@
+--------------------------------------------------------------------------------
+--  Distance - A formally verified Ada library for distance metrics
+--  Copyright (c) 2025
+--  SPDX-License-Identifier: Apache-2.0 WITH LLVM-exception
+--------------------------------------------------------------------------------
+
+--  Package: Distance.Numeric
+--
+--  Purpose: Parent package for numeric distance metrics with support for
+--           multiple numeric types (floating-point, fixed-point, integer)
+--
+--  Responsibilities:
+--    * Provide generic distance functions for numeric vectors
+--    * Support floating-point, fixed-point, and integer types
+--    * Enable formal verification to SPARK Silver Level
+--    * Use signature-based generics for maximum flexibility
+--
+--  Design Notes:
+--    This package provides signature-based generic distance functions that
+--    work with any numeric type:
+--
+--    - Distance.Numeric.Signatures: Defines operation interface
+--    - Distance.Numeric.Euclidean_Generic: Generic Euclidean distance (L2)
+--    - Distance.Numeric.Manhattan_Generic: Generic Manhattan distance (L1)
+--    - Distance.Numeric.Minkowski_Generic: Generic Minkowski distance (Lp)
+--
+--    These generics allow use of any numeric type by providing a signature
+--    package with required operations. Ideal for:
+--      * Floating-point types (Float, Long_Float)
+--      * Fixed-point types with custom sqrt from spark_math
+--      * Integer types with custom sqrt from spark_math
+--      * Custom numeric types
+--
+--  **Example Usage (Floating-Point):**
+--
+--     type Float_Vector is array (Positive range <>) of Float;
+--
+--     package Float_Math is new
+--       Ada.Numerics.Generic_Elementary_Functions (Float);
+--
+--     package Float_Sig is new Distance.Numeric.Signatures
+--       (Element_Type => Float,
+--        Zero         => 0.0,
+--        One          => 1.0,
+--        Sqrt         => Float_Math.Sqrt,
+--        "**"         => Float_Math."**",
+--        Max_Element  => Float'Base'Last);
+--
+--     function Float_Euclidean is new Distance.Numeric.Euclidean_Generic
+--       (Numeric_Ops => Float_Sig,
+--        Index_Type  => Positive,
+--        Vector      => Float_Vector);
+--
+--  **Example Usage (Fixed-Point with custom sqrt):**
+--
+--     type My_Fixed is delta 0.01 range -100.0 .. 100.0;
+--     type Fixed_Vector is array (Positive range <>) of My_Fixed;
+--
+--     --  Assuming Spark_Math.Fixed provides formally proved sqrt:
+--     package Fixed_Ops is new Distance.Numeric.Signatures
+--       (Element_Type => My_Fixed,
+--        Zero         => 0.0,
+--        One          => 1.0,
+--        Sqrt         => Spark_Math.Fixed.Sqrt,  -- Gold-level proof!
+--        Max_Element  => My_Fixed'Last);
+--
+--     function Fixed_Euclidean is new Distance.Numeric.Euclidean_Generic
+--       (Numeric_Ops => Fixed_Ops,
+--        Index_Type  => Positive,
+--        Vector      => Fixed_Vector);
+--
+--  **Child Packages:**
+--    - Distance.Numeric.Signatures: Operation interface for numeric types
+--    - Distance.Numeric.Euclidean_Generic: L2 distance (signature-based)
+--    - Distance.Numeric.Manhattan_Generic: L1 distance (signature-based)
+--    - Distance.Numeric.Minkowski_Generic: Lp distance (signature-based)
+--
+--  **Common Contracts:**
+--    - Precondition: Vectors must have equal length and be non-empty
+--    - Postcondition: Result is non-negative (distance >= Zero)
+--
+--  External Effects: None (Pure package)
+--  Thread Safety: Thread-safe (Pure package, no shared state)
+--  SPARK Status: Compatible
+
+pragma SPARK_Mode (On);
+
+package Distance.Numeric
+  with Pure
+is
+   --  This package serves as the parent for all numeric distance metrics.
+   --  See child packages for specific distance function implementations.
+
+end Distance.Numeric;

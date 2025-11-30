@@ -1,0 +1,19 @@
+name = "distance_tests"
+description = ""
+version = "0.1.0"
+
+authors = ["Heziode"]
+maintainers = ["Heziode <heziode@protonmail.com>"]
+maintainers-logins = ["heziode"]
+licenses = "Apache-2.0 WITH LLVM-exception"
+website = ""
+tags = []
+
+executables = ["test_runner"]
+
+[[depends-on]]
+aunit = "^25.0.0"
+distance = "*"
+
+[[pins]]
+distance = { path = ".." }
