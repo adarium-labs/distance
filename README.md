@@ -2,6 +2,8 @@
 
 🏆 **SPARK Crate of the Year 2025** — [AdaCore](https://www.adacore.com/blog/ada-spark-crate-of-the-year-2025-winners-announced)
 
+🏆 **SPARK Crate of the Year 2025** — [AdaCore](https://www.adacore.com/blog/ada-spark-crate-of-the-year-2025-winners-announced)
+
 Distance is a comprehensive collection of distance and similarity algorithms implemented in Ada 2012. Designed for high-integrity systems, the library utilizes SPARK 2014 to prove the absence of runtime errors (buffer overflows, division by zero). It features generic interfaces to support various floating-point precisions, fixed-point types and integer types, covering domains such as linear algebra, string manipulation, and statistical measures.
 
 ## Features
